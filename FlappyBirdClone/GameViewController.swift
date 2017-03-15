@@ -11,10 +11,8 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = MainMenuScene(fileNamed: "MainMenuScene") {
@@ -31,6 +29,10 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
             view.showsPhysics = true;
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
 
     override var shouldAutorotate: Bool {
@@ -52,5 +54,5 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
-    }
+    }    
 }

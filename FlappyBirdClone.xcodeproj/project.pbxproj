@@ -63,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2604DF761E792D53000670F4 /* FlappyBirdClone.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = FlappyBirdClone.playground; sourceTree = "<group>"; };
 		5058D2401E2599B400CCD5B8 /* Highscore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Highscore.png; sourceTree = "<group>"; };
 		5058D2411E2599B400CCD5B8 /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play.png; sourceTree = "<group>"; };
 		5058D2421E2599B400CCD5B8 /* Press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Press.png; sourceTree = "<group>"; };
@@ -132,6 +133,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2604DF751E792D53000670F4 /* Playground */ = {
+			isa = PBXGroup;
+			children = (
+				2604DF761E792D53000670F4 /* FlappyBirdClone.playground */,
+			);
+			path = Playground;
+			sourceTree = "<group>";
+		};
+		260C42C91E76A10500827C63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5058D23F1E25996A00CCD5B8 /* Scoreboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +171,7 @@
 		50DA15501E24195F00BBA410 = {
 			isa = PBXGroup;
 			children = (
+				2604DF751E792D53000670F4 /* Playground */,
 				50DA155B1E24195F00BBA410 /* FlappyBirdClone */,
 				50DA15B71E241C6A00BBA410 /* Classes */,
 				50DA15B61E241C5C00BBA410 /* Scenes */,
@@ -162,6 +179,7 @@
 				50DA15761E24196100BBA410 /* FlappyBirdCloneTests */,
 				50DA15811E24196100BBA410 /* FlappyBirdCloneUITests */,
 				50DA155A1E24195F00BBA410 /* Products */,
+				260C42C91E76A10500827C63 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -274,9 +292,9 @@
 		50DA15B61E241C5C00BBA410 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				50DA15BB1E241CE900BBA410 /* GameplayScene.swift */,
 				5058D2501E26E4E900CCD5B8 /* MainMenuScene.sks */,
 				50DA15B81E241C9800BBA410 /* GameplayScene.sks */,
-				50DA15BA1E241CC700BBA410 /* Scene Classes */,
 				5058D2541E26E57B00CCD5B8 /* MainMenuScene.swift */,
 			);
 			name = Scenes;
@@ -290,14 +308,6 @@
 				50DA15BD1E24260700BBA410 /* Bird Class */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		50DA15BA1E241CC700BBA410 /* Scene Classes */ = {
-			isa = PBXGroup;
-			children = (
-				50DA15BB1E241CE900BBA410 /* GameplayScene.swift */,
-			);
-			name = "Scene Classes";
 			sourceTree = "<group>";
 		};
 		50DA15BD1E24260700BBA410 /* Bird Class */ = {
@@ -384,7 +394,7 @@
 				TargetAttributes = {
 					50DA15581E24195F00BBA410 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 4J6N8TR2LN;
+						DevelopmentTeam = DZK8EVM94K;
 						ProvisioningStyle = Automatic;
 					};
 					50DA15721E24196000BBA410 = {
@@ -633,11 +643,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4J6N8TR2LN;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DZK8EVM94K;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
 				INFOPLIST_FILE = FlappyBirdClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Deborah.FlappyBirdClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JasonMcCoy.ScreamPlane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FlappyBirdClone/FlappyBirdClone-Bridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -646,11 +665,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4J6N8TR2LN;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DZK8EVM94K;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
 				INFOPLIST_FILE = FlappyBirdClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Deborah.FlappyBirdClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JasonMcCoy.ScreamPlane;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FlappyBirdClone/FlappyBirdClone-Bridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

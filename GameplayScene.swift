@@ -7,8 +7,9 @@
 //
 
 import SpriteKit
+import Speech
 
-class GameplayScene: SKScene, SKPhysicsContactDelegate {
+public class GameplayScene: SKScene, SKPhysicsContactDelegate {
     
     var bird = Bird();
     
@@ -21,28 +22,27 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     var gameStarted = false;
     var isAlive = false;
     
-    var press = SKSpriteNode();
+    var press = SKSpriteNode()
     
-    override func didMove(to view: SKView) {
+    override public func didMove(to view: SKView) {
         initalize();
-        
     }
     
-    override func update(_ currentTime: TimeInterval) {
+    override public func update(_ currentTime: TimeInterval) {
         if isAlive {
             moveBackgroundsAndGrounds();
+        }
     }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //First Time We Touch The Screen
         if gameStarted == false {
             isAlive = true;
             gameStarted = true;
             press.removeFromParent();
             spawnObstacles();
-            bird.physicsBody?.affectedByGravity = true;
-            bird.flap();
+            bird.physicsBody?.affectedByGravity = true
+            bird.flap()
         }
         
         if isAlive {
@@ -58,6 +58,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
                 self.removeAllChildren();
                 initalize();
             }
+            
             if atPoint(location).name == "Quit" {
                 let mainMenu = MainMenuScene(fileNamed: "MainMenuScene");
                 mainMenu?.scaleMode = .aspectFill
@@ -66,7 +67,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func didBegin(_ contact: SKPhysicsContact) {
+    public func didBegin(_ contact: SKPhysicsContact) {
         var firstBody = SKPhysicsBody();
         var secondBody = SKPhysicsBody();
         
@@ -94,8 +95,9 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    var oldPeak: Float = 0;
     func initalize() {
-        
+//        try! AppDelegate.mySelf.startRecording(callback: callback)
         gameStarted = false;
         isAlive = false;
         score = 0;
@@ -108,6 +110,19 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         createGrounds();
         createLabel();
         
+        oldPeak = 0
+        AppDelegate.mySelf.startRecording { peak in
+            let oldVal = self.oldPeak
+            self.oldPeak = pow(10, (0.05 * peak));
+            
+            print("Val = \(self.oldPeak)")
+            guard self.oldPeak >= 0.12, abs(oldVal - self.oldPeak) >= 0.008, self.isAlive else {
+                return
+            }
+            
+            self.bird.flap()
+            print("=============\(self.oldPeak)")
+        }
     }
     
     func createInstructions() {
@@ -128,30 +143,28 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     
     func createBackgrounds() {
         for i in 0...2 {
-        let bg = SKSpriteNode(imageNamed: "BG Day");
-        bg.name = "BG";
-        bg.zPosition = 0;
-        bg.anchorPoint = CGPoint(x: 0.5, y: 0.5);
-        bg.position = CGPoint(x: CGFloat(i) * bg.size.width, y: 0);
-        self.addChild(bg);
+            let bg = SKSpriteNode(imageNamed: "BG Day");
+            bg.name = "BG";
+            bg.zPosition = 0;
+            bg.anchorPoint = CGPoint(x: 0.5, y: 0.5);
+            bg.position = CGPoint(x: CGFloat(i) * bg.size.width, y: 0);
+            self.addChild(bg);
             
         }
     }
     
     func createGrounds() {
         for i in 0...2 {
-        let ground = SKSpriteNode(imageNamed: "Ground");
-        ground.name = "Ground";
-        ground.zPosition = 4;
-        ground.anchorPoint = CGPoint(x: 0.5, y: 0.5);
-        ground.position = CGPoint(x: CGFloat(i) * ground.size.width, y: -(self.frame.size.height / 2));
-        self.addChild(ground);
-        ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size);
-        ground.physicsBody?.affectedByGravity = false;
-        ground.physicsBody?.isDynamic = false;
-        ground.physicsBody?.categoryBitMask = ColliderType.Ground;
-       // ground.physicsBody?.collisionBitMask = ColliderType.Bird;
-       // ground.physicsBody?.contactTestBitMask = ColliderType.Bird;
+            let ground = SKSpriteNode(imageNamed: "Ground");
+            ground.name = "Ground";
+            ground.zPosition = 4;
+            ground.anchorPoint = CGPoint(x: 0.5, y: 0.5);
+            ground.position = CGPoint(x: CGFloat(i) * ground.size.width, y: -(self.frame.size.height / 2));
+            self.addChild(ground);
+            ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size);
+            ground.physicsBody?.affectedByGravity = false;
+            ground.physicsBody?.isDynamic = false;
+            ground.physicsBody?.categoryBitMask = ColliderType.Ground;
         }
     }
     
@@ -161,20 +174,20 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             
             node.position.x -= 4.5;
             if node.position.x < -(self.frame.width) {
-            node.position.x += self.frame.width * 3;
+                node.position.x += self.frame.width * 3;
             }
         }));
         
-    func moveBackgroundsAndGrounds() {
-        enumerateChildNodes(withName: "Ground", using: ({
-        (node, error) in
+        func moveBackgroundsAndGrounds() {
+            enumerateChildNodes(withName: "Ground", using: ({
+                (node, error) in
                 
-            node.position.x -= 2;
-            if node.position.x < -(self.frame.width) {
-            node.position.x += self.frame.width * 3;
+                node.position.x -= 2;
+                if node.position.x < -(self.frame.width) {
+                    node.position.x += self.frame.width * 3;
                 }
             }));
-    }
+        }
         
     }
     
@@ -198,8 +211,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         scoreNode.physicsBody?.collisionBitMask = 0;
         scoreNode.physicsBody?.affectedByGravity = false;
         scoreNode.physicsBody?.isDynamic = false;
-        
-        
+
         pipeUp.name = "Pipe";
         pipeUp.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         pipeUp.position = CGPoint(x: 0, y: 630);
@@ -264,6 +276,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func birdDied() {
+        AppDelegate.mySelf.finishRecording()
         
         self.removeAction(forKey: "Spawn");
         
@@ -308,5 +321,3 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(quit);
     }
 }
-
-
