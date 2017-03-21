@@ -6,15 +6,17 @@ This application was created as a clone for the game, Flappy Bird. To learn more
 
 **The application offers the following features:**
 
-* Creating an application allowing users to record in different voice effects.
+* Creating an application allowing users to play a replica of the game, Flappy Bird. Users can now play the bird with voice activation. 
 
 **Technologies Used In Application:**
+
 * SpriteKit
 * SKActions
 * SKSpriteNodes
 * Swift
 
 **Testing The App:**
+
 * Download the project to your computer from this project page.
 * Once the project is downloaded, open the .xcodeproj file from the folder.
 * Run the project either using the iPhone simulator or your device. I recommend running the project on the latest iPhone device. It should be compiled with the latest version of Xcode.
